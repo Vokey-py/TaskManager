@@ -1,0 +1,75 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'taskmanager/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+    <title>{{ title }}</title>
+</head>
+<body>
+<header>
+    <h1><a class="title" href="{% url 'home' %}">Менеджер задач</a></h1>
+</header>
+{% block mainmenu %}
+<div class="menu d-flex justify-content-center">
+    {% if request.user.is_authenticated %}
+    <div class="user-menu">
+        <a class="btn btn-outline-light user-greeting">Вы вошли как {{ user.username }}</a>
+        <a class="btn btn-dark" href="{% url 'logout' %}">Выйти</a>
+    </div>
+    {% else %}
+    <div class="guest-menu d-flex">
+        <a class="btn btn-outline-dark me-2" href="{% url 'login' %}">Авторизация</a>
+        <a class="btn btn-outline-dark" href="{% url 'reg' %}">Регистрация</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock mainmenu %}
+
+{% block content %}
+{% endblock %}
+{% if page_obj.has_other_pages %}
+<div class="task-container">
+    <nav class="centered-form">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1">&lt;&lt;</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{page_obj.previous_page_number}}">&lt;</a>
+            </li>
+            {%endif%}
+            {% for p in paginator.page_range %}
+            {% if page_obj.number == p %}
+            <li class="page-item active" aria-current="page"><a class="page-link">{{ p }} </a></li>
+            {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+            </li>
+            {%endif%}
+            {% endfor %}
+            {% if page_obj.has_next%}
+            <li class="page-item">
+                <a class="page-link" href="?page={{page_obj.next_page_number}}">&gt;</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{page_obj.paginator.num_pages}}">&gt;&gt;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endif %}
+
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'taskmanager/base.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="task-container">
+    <div class="task">
+        <h3>{{task.title}}</h3>
+        <p>{{task.description}}</p>
+        <p>Выполнить до: {{task.date_time_of_completion|date:"d-m-Y H:i:s"}}</p>
+        <a href="{% url 'update_task' task.id %}" class="btn btn-success">Изменить задачу</a>
+        <a href="{% url 'delete_task' task.id %}" class="btn btn-danger float-end">Удалить задачу</a>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-danger">Вы не авторизованы</div>
+{% endif %}
+{% endblock %}

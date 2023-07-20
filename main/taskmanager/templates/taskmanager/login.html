@@ -1,0 +1,20 @@
+{% extends 'taskmanager/base.html' %}
+
+{% block content %}
+<div class="task-container">
+    <h1 class="centered-form">{{title}}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        <div class="alert alert-warning">{{form.non_field_errors}}</div>
+        {% endif %}
+        {% for f in form %}
+        <p><label class="labelDefault">{{f.label}}:</label>{{f}}</p>
+        {% if f.errors %}
+        <div class="alert alert-warning">{{ f.label }}: {{ f.errors|striptags }}</div>
+        {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'taskmanager/base.html' %}
+
+{% block content %}
+<div class="task-container">
+    <form method="post">
+        {% csrf_token %}
+        <div class="alert alert-danger" role="alert">Вы точно хотите удалить задачу {{task.title}}?</div>
+        <button type="submit" class="btn btn-danger">Удалить задачу</button>
+    </form>
+</div>
+{% endblock %}

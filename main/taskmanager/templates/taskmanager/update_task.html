@@ -1,0 +1,30 @@
+{% extends 'taskmanager/base.html' %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="task-container">
+    <form method="post">
+        {% csrf_token %}
+        {% for f in form %}
+        <p><label class="labelDefault">{{f.label}}:</label>{{f}}</p>
+        <div>{{f.errors}}</div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Изменить</button>
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr('.flatpickr', {
+            enableTime: true,
+            enableSeconds: true,
+            dateFormat: 'd.m.Y H:i:S',
+            locale: 'ru',
+            time_24hr: true,
+            theme: 'dark',
+        });
+    });
+</script>
+{% else %}
+<div class="alert alert-danger">Вы не авторизованы</div>
+{% endif %}
+{% endblock %}

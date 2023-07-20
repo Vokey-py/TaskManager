@@ -1,0 +1,109 @@
+header {
+    background-color: #918151;
+    color: #232321;
+    text-align: center;
+    max-width: 600px;
+    margin: 20px auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 2px solid peachpuff;
+}
+
+h1 {
+    margin: 0;
+}
+.title {
+    text-decoration: none;
+    color: black;
+}
+
+.labelDefault {
+    color: #bcd8ff;
+    padding-bottom: 10px;
+}
+
+
+.menu {
+    background-color: #918151;
+    color: #000000;
+    text-align: center;
+    max-width: 600px;
+    margin: 20px auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 2px solid peachpuff;
+}
+
+
+.task-container {
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+
+.task {
+    background-color: #ffe5db;
+    border: 2px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+body {
+    background-color: #767663;
+}
+.button {
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.container {
+  max-width: 600px; /* Можете изменить ширину контейнера по вашему усмотрению */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.centered-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    padding-bottom: 20px;
+}
+
+.page-link{
+    background: #ffe5db;
+    color: #555555;
+    border-color: white;
+}
+.page-link:hover{
+    background: #555555;
+    color: white;
+    border-color: white;
+}
+
+.page-item.active .page-link{
+    background: #555555;
+    border-color: white;
+}
+
+.btn.btn-info{
+    background: #555555;
+    border-color: #555555;
+    color: white;
+}
+
+.btn.btn-info:hover{
+    background: #444444;
+    border-color: #444444;
+    color: gold;
+}

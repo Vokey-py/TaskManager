@@ -1,0 +1,25 @@
+{% extends 'taskmanager/base.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="task-container">
+    <form method="post" class="mb-3">
+        {% csrf_token %}
+        <button type="submit" name="sort_by" value="date_time_of_completion" class="btn btn-dark">Сортировать по дате
+            выполнения
+        </button>
+        <a href="{% url 'add_task' %}" class="btn btn-success float-end"> Добавить задачу</a>
+    </form>
+    {% for task in tasks %}
+    <div class="task">
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description|linebreaks|truncatewords:50 }}</p>
+        <p>Выполнить до: {{ task.date_time_of_completion|date:"d.m.Y H:i:s" }}</p>
+        <a href="{{ task.get_absolute_url }}" class="btn btn-info">Подробнее</a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="task-container alert alert-warning">Вы не авторизованы, пожалуйста авторизуйтесь или зарегистрируйтесь!
+</div>
+{% endif %}
+{% endblock %}
