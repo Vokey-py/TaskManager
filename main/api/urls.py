@@ -1,6 +1,9 @@
-from django.urls import path
-from api.views import TaskManagerAPIView
+from django.urls import path, include
+from api.views import *
+from .routers import *
+
+
 
 urlpatterns = [
-    path('api/TaskManagerAPIView/', TaskManagerAPIView.as_view()),
+    path('api/', include(taskRouter.urls))
 ]
