@@ -140,7 +140,7 @@ class AddTask(LoginRequiredMixin, DataMixin, CreateView):
     # Автоматическое присваивание id авторизованного пользователя в поле user_id Модели Задача
     def form_valid(self, form):
         user = self.request.user
-        form.instance.user_id = user
+        form.instance.user = user
         return super().form_valid(form)
 
 
