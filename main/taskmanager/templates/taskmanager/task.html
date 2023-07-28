@@ -6,6 +6,15 @@
         <h3>{{task.title}}</h3>
         <p>{{task.description}}</p>
         <p>Выполнить до: {{task.date_time_of_completion|date:"d-m-Y H:i:s"}}</p>
+        <p>
+        {% if task.completion == True %}
+            <span style="color: green;">Выполнено</span>
+        {% elif task.completion == False %}
+            <span style="color: red;">Не выполнено</span>
+        {% else %}
+            Статус выполнения: {{ task.completion }}
+        {% endif %}
+        </p>
         <a href="{% url 'update_task' task.id %}" class="btn btn-success">Изменить задачу</a>
         <a href="{% url 'delete_task' task.id %}" class="btn btn-danger float-end">Удалить задачу</a>
     </div>
