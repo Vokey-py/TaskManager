@@ -23,7 +23,7 @@ from taskmanager.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('taskmanager.urls')),
-    path('', include('api.urls'))
+    path('api/', include('api.urls'))
     # path("__debug__/", include("debug_toolbar.urls")),
 ]
 

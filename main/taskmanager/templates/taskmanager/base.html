@@ -21,12 +21,12 @@
     {% if request.user.is_authenticated %}
     <div class="user-menu">
         <a class="btn btn-outline-light user-greeting">Вы вошли как {{ user.username }}</a>
-        <a class="btn btn-dark" href="{% url 'logout' %}">Выйти</a>
+        <a class="btn btn-dark" href="{% url 'user_logout' %}">Выйти</a>
     </div>
     {% else %}
     <div class="guest-menu d-flex">
-        <a class="btn btn-outline-dark me-2" href="{% url 'login' %}">Авторизация</a>
-        <a class="btn btn-outline-dark" href="{% url 'reg' %}">Регистрация</a>
+        <a class="btn btn-outline-dark me-2" href="{% url 'user_login' %}">Авторизация</a>
+        <a class="btn btn-outline-dark" href="{% url 'user_reg' %}">Регистрация</a>
     </div>
     {% endif %}
 </div>
