@@ -1,7 +1,7 @@
 const Profile = () => {
     return (
         <div className='content'>
-            <img src='https://webcomplex.com.ua/wp-content/uploads/2014/11/slider.png'/>
+            <img src='https://webcomplex.com.ua/wp-content/uploads/2014/11/slider.png' alt='pictures'/>
             <div>
                 ava + Description
             </div>
