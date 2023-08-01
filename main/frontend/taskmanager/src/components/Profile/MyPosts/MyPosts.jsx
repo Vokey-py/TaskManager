@@ -1,23 +1,29 @@
 import s from './MyPosts.module.css'
 import Post from "./Post/Post"
+import React from "react";
 
-let postData = [
-    {id: 1, message: 'Hi, how are you?', likeCount: '10'},
-    {id: 2, message: 'I good, and you?', likeCount: '23'},
-]
+let addPost
 
-let postsElements = postData.map(p => <Post message={p.message} likesCount={p.likeCount}/>)
+const MyPosts = (props) => {
 
-const MyPosts = () => {
+    let newPostElement = React.createRef();
+
+    let addPost = () => {
+        let text = newPostElement.current.value
+        props.addPost(text)
+        newPostElement.current.value = ''
+    }
+
+    let postsElements = props.state.postData.map(p => <Post message={p.message} likesCount={p.likeCount}/>)
     return (
         <div className={s.myPostBlock}>
             <h3>My post</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={ addPost }>Add post</button>
                 </div>
             </div>
             <div>
