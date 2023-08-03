@@ -1,3 +1,9 @@
+import reducerDialogs from "./reducerDialogs";
+import reducerProfile from "./reducerProfile";
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+const SEND_MESSAGE = 'SEND_MESSAGE';
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 let store = {
     _state: {
         profilePage: {
@@ -18,32 +24,53 @@ let store = {
                 {id: 2, message: 'My name'},
                 {id: 3, message: 'Is Ruslan'}
             ],
+            newMessageText: 'itkamasutra'
         }
     },
-    getState(){
+    getState() {
         return this._state
     },
     _callSubscriber() {
         console.log('State changed')
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-        }
-        this._state.profilePage.postData.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
     subscribe(observer) {
         this._callSubscriber = observer
+    },
+    dispatch(action) {
+        this._state.profilePage = reducerProfile(this._state.profilePage, action)
+        this._state.dialogPage = reducerDialogs(this._state.dialogPage, action)
+        this._callSubscriber(this._state)
     }
 }
+
+export const addPostActionCreator = () => {
+    return {
+        type: ADD_POST
+    }
+}
+
+export const updateNewPostTextActionCreator = (text) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        newText: text
+    }
+}
+
+
+export const sendMessageCreator = () => {
+    return {
+        type: SEND_MESSAGE
+    }
+}
+
+export const updateNewMessageBodyCreator = (body) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_BODY,
+        body: body
+    }
+}
+
+
 
 export default store;
 window.store = store;
