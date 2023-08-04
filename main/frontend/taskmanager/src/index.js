@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import store from "./redux/redux-store";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+import StoreContext from "./StoreContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -13,7 +14,9 @@ let renderEntireTree = (state) => {
         <React.StrictMode>
             <BrowserRouter>
                 <ErrorBoundary>
-                    <App state={state} store={store}/>
+                    <StoreContext.Provider value={store} >
+                        <App/>
+                    </StoreContext.Provider>
                 </ErrorBoundary>
             </BrowserRouter>
         </React.StrictMode>
@@ -21,7 +24,7 @@ let renderEntireTree = (state) => {
 }
 renderEntireTree(store.getState());
 
-store.subscribe( () =>{
+store.subscribe(() => {
     let state = store.getState()
     renderEntireTree(state)
 })
