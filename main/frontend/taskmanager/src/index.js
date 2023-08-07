@@ -4,29 +4,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import store from "./redux/redux-store";
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
-import StoreContext from "./StoreContext";
+import {Provider} from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-let renderEntireTree = (state) => {
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <ErrorBoundary>
-                    <StoreContext.Provider value={store} >
+                    <Provider store={store} >
                         <App/>
-                    </StoreContext.Provider>
-                </ErrorBoundary>
+                    </Provider>
             </BrowserRouter>
         </React.StrictMode>
-    );
-}
-renderEntireTree(store.getState());
-
-store.subscribe(() => {
-    let state = store.getState()
-    renderEntireTree(state)
-})
+    )
 
 reportWebVitals();
