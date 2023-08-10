@@ -1,12 +1,16 @@
+import profile from "../components/Profile/Profile";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 let initialState = {
     postData: [
         {id: 1, message: 'Hi, how are you?', likeCount: '10'},
         {id: 2, message: 'I good, and you?', likeCount: '23'},
     ],
-    newPostText: 'it-kamasutra.com'
+    newPostText: 'it-kamasutra.com',
+    profile: null
 }
 
 export const addPostActionCreator = () => {
@@ -21,6 +25,7 @@ export const updateNewPostTextActionCreator = (text) => {
         newText: text
     }
 }
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 
 
 const reducerProfile = (state = initialState, action) => {
@@ -42,6 +47,9 @@ const reducerProfile = (state = initialState, action) => {
                 postData: [...state.postData, newPost],
                 newPostText: '',
             };
+        }
+        case SET_USER_PROFILE: {
+            return {...state, profile: action.profile}
         }
         default:
             return state
