@@ -1,4 +1,6 @@
 import profile from "../components/Profile/Profile";
+import {usersAPI} from "../api/api";
+import {follow, setIsFetchingProgress} from "./reducerUser";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -53,6 +55,14 @@ const reducerProfile = (state = initialState, action) => {
         }
         default:
             return state
+    }
+}
+
+export const thunkGetUserProfile = (userId) => {
+    return (dispatch) => {
+        usersAPI.getUserProfile(userId).then(response => {
+            dispatch(setUserProfile(response.data));
+        });
     }
 }
 

@@ -2,9 +2,7 @@ import {connect} from "react-redux";
 import {
     follow,
     setCurrentPage,
-    setIsFetching, setIsFetchingProgress,
-    setTotalUsersCount,
-    setUsers,
+    setIsFetchingProgress, thunkFollow, thunkGetUsers, thunkUnFollow,
     unfollow
 } from "../../redux/reducerUser";
 import Users from "./Users";
@@ -15,21 +13,11 @@ import {usersAPI} from "../../api/api";
 class UsersAjaxComponent extends React.Component {
 
     componentDidMount() {
-        this.props.setIsFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.setIsFetching(false);
-            this.props.setUsers(data.items);
-            this.props.setTotalUsersCount(data.totalCount)
-        });
+        this.props.thunkGetUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.setIsFetching(true);
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.setUsers(data.items);
-            this.props.setIsFetching(false);
-        });
+        this.props.thunkGetUsers(pageNumber, this.props.pageSize);
     }
 
     render() {
@@ -44,6 +32,8 @@ class UsersAjaxComponent extends React.Component {
                    mpFollow={this.props.follow}
                    setIsFetchingProgress={this.props.setIsFetchingProgress}
                    followingInProgress={this.props.followingInProgress}
+                   thunkFollow={this.props.thunkFollow}
+                   thunkUnFollow={this.props.thunkUnFollow}
             />
         </>
 
@@ -91,9 +81,9 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     follow,
     unfollow,
-    setUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    setIsFetching,
-    setIsFetchingProgress
+    setIsFetchingProgress,
+    thunkGetUsers,
+    thunkFollow,
+    thunkUnFollow
 })(UsersAjaxComponent);

@@ -1,4 +1,4 @@
-import {current} from "@reduxjs/toolkit";
+import {usersAPI} from "../api/api";
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -15,7 +15,7 @@ let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: [2,3]
+    followingInProgress: [2, 3]
 }
 
 
@@ -86,5 +86,41 @@ const reducerUser = (state = initialState, action) => {
             return state
     }
 }
+export const thunkGetUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
 
+        dispatch(setIsFetching(true));
+
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(setCurrentPage(currentPage));
+            dispatch(setIsFetching(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount))
+        });
+    }
+}
+
+export const thunkFollow = (userId) => {
+    return (dispatch) => {
+        dispatch(setIsFetchingProgress(true, userId));
+        usersAPI.follow(userId).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(follow(userId))
+            }
+            dispatch(setIsFetchingProgress(false, userId))
+        });
+    }
+}
+
+export const thunkUnFollow = (userId) => {
+    return (dispatch) => {
+        dispatch(setIsFetchingProgress(true, userId));
+        usersAPI.unfollow(userId).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(unfollow(userId))
+            }
+            dispatch(setIsFetchingProgress(false, userId))
+        });
+    }
+}
 export default reducerUser;
