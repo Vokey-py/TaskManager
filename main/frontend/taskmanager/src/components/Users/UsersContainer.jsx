@@ -88,5 +88,4 @@ export default compose(
     thunkFollow,
     thunkUnFollow
 }),
-    withAuthRedirect
 )(UsersAjaxComponent)
