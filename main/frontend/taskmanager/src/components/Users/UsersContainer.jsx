@@ -8,7 +8,8 @@ import {
 import Users from "./Users";
 import React from 'react'
 import Preloader from "../common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
+import {withAuthRedirect} from "../Hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersAjaxComponent extends React.Component {
 
@@ -48,7 +49,7 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
     }
 
 }
@@ -77,8 +78,8 @@ let mapStateToProps = (state) => {
     }
 }*/
 
-
-export default connect(mapStateToProps, {
+export default compose(
+    connect(mapStateToProps, {
     follow,
     unfollow,
     setCurrentPage,
@@ -86,4 +87,6 @@ export default connect(mapStateToProps, {
     thunkGetUsers,
     thunkFollow,
     thunkUnFollow
-})(UsersAjaxComponent);
+}),
+    withAuthRedirect
+)(UsersAjaxComponent)

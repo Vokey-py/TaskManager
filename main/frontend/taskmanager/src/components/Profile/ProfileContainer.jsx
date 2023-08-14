@@ -3,6 +3,8 @@ import Profile from "./Profile";
 import {thunkGetUserProfile} from "../../redux/reducerProfile";
 import {connect} from "react-redux";
 import withRouter from "../utils/utils";
+import {withAuthRedirect} from "../Hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class ProfileAPIContainer extends React.Component {
     componentDidMount() {
@@ -21,10 +23,11 @@ class ProfileAPIContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
 });
 
-let withUrlDataContainerComponent = withRouter(ProfileAPIContainer)
-
-export default connect(mapStateToProps, {
-   thunkGetUserProfile})(withUrlDataContainerComponent);
+export default compose(
+    connect(mapStateToProps, {thunkGetUserProfile}),
+    withRouter,
+    withAuthRedirect,
+)(ProfileAPIContainer)
