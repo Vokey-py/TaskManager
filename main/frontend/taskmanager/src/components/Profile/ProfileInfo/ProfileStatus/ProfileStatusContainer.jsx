@@ -2,8 +2,11 @@ import React from "react";
 
 
 class ProfileStatusContainer extends React.Component {
+
+
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
     EditMode = () => {
@@ -14,6 +17,23 @@ class ProfileStatusContainer extends React.Component {
         } else {
             this.setState({
                 editMode: false
+            })
+            this.props.updateStatus(this.state.status);
+        }
+    }
+
+    onStatusChange = (e) => {
+        this.setState(
+            {
+                status: e.currentTarget.value
+            }
+        );
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.status !==  this.props.status){
+            this.setState({
+                status: this.props.status
             })
         }
     }
@@ -28,7 +48,7 @@ class ProfileStatusContainer extends React.Component {
                 }
                 {this.state.editMode &&
                     <div>
-                        <input autoFocus={true} onBlur={this.EditMode} value={this.props.status}/>
+                        <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.EditMode} value={this.state.status}/>
                     </div>
                 }
             </div>

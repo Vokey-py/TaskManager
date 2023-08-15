@@ -13,7 +13,7 @@ class ProfileAPIContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.router.params.userId;
         if (!userId) {
-            userId = 2;
+            userId = 29771;
         }
         this.props.thunkGetUserProfile(userId)
         this.props.thunkGetStatusUserProfile(userId)
