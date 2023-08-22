@@ -1,18 +1,13 @@
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
+
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
-export const sendMessageActionCreator = () => {
+export const sendMessageActionCreator = (newMessageText) => {
     return {
-        type: SEND_MESSAGE
+        type: SEND_MESSAGE,
+        newMessageText
     }
 }
 
-export const updateNewMessageActionCreator = (text) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        updateNewMessageText: text
-    }
-}
 
 
 let initialState = {
@@ -26,24 +21,16 @@ let initialState = {
         {id: 2, message: 'My name'},
         {id: 3, message: 'Is Ruslan'}
     ],
-    newMessageText: 'itkamasutra'
 }
 
 
 const reducerDialogs = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {
-                ...state,
-                newMessageText: action.updateNewMessageText
-            };
-        }
         case SEND_MESSAGE: {
-            let body = state.newMessageText;
+            let body = action.newMessageText;
             return {
                 ...state,
                 messagesData: [...state.messagesData, {id: 6, message: body}],
-                newMessageText: '',
             };
         }
         default:

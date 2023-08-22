@@ -4,12 +4,14 @@ import reducerDialogs from "./reducerDialogs";
 import reducerUser from "./reducerUser";
 import reducerAuth from "./reducerAuth";
 import thunk from "redux-thunk"
+import {reducer as reducerForm} from "redux-form";
 
 let reducers = combineReducers({
         profilePage: reducerProfile,
         dialogPage: reducerDialogs,
         usersPage: reducerUser,
         auth: reducerAuth,
+        form: reducerForm
     }
 )
 
