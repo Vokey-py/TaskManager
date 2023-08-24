@@ -1,9 +1,13 @@
 import ReduxLoginForm from "./LoginForm";
+import {Navigate} from "react-router-dom";
 
 
 const Login = (props) => {
     const onSubmit = (formData) =>{
-        console.log(formData);
+        props.thunkLogin(formData.email, formData.password, formData.rememberMe)
+    }
+    if (props.isAuth) {
+        return <Navigate to="/profile" replace />
     }
     return(
             <div>

@@ -5,18 +5,18 @@ import {maxLenghtCreator, requiredField} from "../utils/validators/validators";
 const maxLenghtCreator20 =  maxLenghtCreator(20)
 
 const LoginForm = (props) => {
-    console.log('RERENDER')
     return(
                 <form onSubmit={props.handleSubmit}>
                     <div>
-                        <Field placeholder={"Login"}
-                               name={"login"}
+                        <Field placeholder={"Email"}
+                               name={"email"}
                                component={Input}
                                validate={[requiredField, maxLenghtCreator20]}/>
                     </div>
                     <div>
                         <Field placeholder={"Password"}
                                name={"password"}
+                               type={"password"}
                                component={Input}
                                validate={[requiredField, maxLenghtCreator20]}/>
                     </div>

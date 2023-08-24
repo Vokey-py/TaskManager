@@ -1,0 +1,40 @@
+import {authAPI, usersAPI} from "../api/api";
+import {setUserProfile} from "./reducerProfile";
+import {thunkGetAuth} from "./reducerAuth";
+
+const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
+
+
+let initialState = {
+    initialized: false,
+}
+
+
+const reducerApp = (state = initialState, action) => {
+    switch (action.type) {
+        case INITIALIZED_SUCCESS: {
+            return {
+                ...state,
+                initialized: true
+            }
+        }
+        default:
+            return state
+    }
+}
+
+export const initializedSuccess = () =>
+    ({type: INITIALIZED_SUCCESS})
+
+
+export const thunkInitialized = () => {
+    return (dispatch) => {
+        let promise = dispatch(thunkGetAuth());
+        Promise.all([promise])
+            .then(() => {
+            dispatch(initializedSuccess())
+        })
+    }
+}
+
+export default reducerApp;
