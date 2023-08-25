@@ -8,8 +8,14 @@ import {
 import Users from "./Users";
 import React from 'react'
 import Preloader from "../common/Preloader/Preloader";
-import {withAuthRedirect} from "../Hoc/withAuthRedirect";
 import {compose} from "redux";
+import {getUsersSelector,
+    getPageSizeSelector,
+    getTotalUsersCountSelector,
+    getCurrentPageSelector,
+    getIsFetchingSelector,
+    getFollowingInProgressSelector
+} from "../../redux/usersSelector";
 
 class UsersAjaxComponent extends React.Component {
 
@@ -42,14 +48,27 @@ class UsersAjaxComponent extends React.Component {
 
 }
 
+// let mapStateToProps = (state) => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress,
+//     }
+//
+// }
+
+
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        users: getUsersSelector(state),
+        pageSize: getPageSizeSelector(state),
+        totalUsersCount: getTotalUsersCountSelector(state),
+        currentPage: getCurrentPageSelector(state),
+        isFetching: getIsFetchingSelector(state),
+        followingInProgress: getFollowingInProgressSelector(state),
     }
 
 }
