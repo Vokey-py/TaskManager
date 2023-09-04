@@ -8,7 +8,6 @@ import {
 import {connect} from "react-redux";
 import withRouter from "../utils/utils";
 import {compose} from "redux";
-import {NavLink} from "react-router-dom";
 
 class ProfileAPIContainer extends React.Component {
     componentDidMount() {

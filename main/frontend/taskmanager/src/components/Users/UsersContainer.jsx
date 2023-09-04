@@ -9,7 +9,7 @@ import Users from "./Users";
 import React from 'react'
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
-import {getUsersSelector,
+import {getUsersReSelector,
     getPageSizeSelector,
     getTotalUsersCountSelector,
     getCurrentPageSelector,
@@ -63,7 +63,7 @@ class UsersAjaxComponent extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: getUsersSelector(state),
+        users: getUsersReSelector(state),
         pageSize: getPageSizeSelector(state),
         totalUsersCount: getTotalUsersCountSelector(state),
         currentPage: getCurrentPageSelector(state),
